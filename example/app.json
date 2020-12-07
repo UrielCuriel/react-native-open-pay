@@ -1,0 +1,22 @@
+{
+  "name": "react-native-open-pay-example",
+  "displayName": "OpenPay Example",
+  "expo": {
+    "name": "react-native-open-pay-example",
+    "slug": "react-native-open-pay-example",
+    "description": "Example app for react-native-open-pay",
+    "privacy": "public",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
