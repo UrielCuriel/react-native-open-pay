@@ -330,7 +330,10 @@ WebView error
 check this article to config webview
 https://engineering.brigad.co/demystifying-react-native-modules-linking-964399ec731b
 
+
+
 Native module RNCWebView tried to override RNCWebViewModule for module name
+
 ```
   @Override    
   public boolean canOverrideExistingModule() {        
@@ -338,5 +341,6 @@ Native module RNCWebView tried to override RNCWebViewModule for module name
   }
 ```
 to `node_modules/react_native_webview/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewModule.java`
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
