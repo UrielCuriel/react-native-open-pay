@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { WebView } from 'react-native-webview';
 import { Button } from 'react-native-elements';
-import Constants from 'expo-constants';
 import DeviceInfo from 'react-native-device-info';
 import sprintfJs from 'sprintf-js';
 import base64 from 'react-native-base64';
-const { CreditCardInput } = require('react-native-credit-card-input-fullpage');
+const { CreditCardInput } = require('react-native-credit-card-fullpage-form');
 const uuidv4 = require('uuid/v4');
 
 const vsprintf = sprintfJs.vsprintf;
@@ -16,6 +15,21 @@ sessionId = sessionId.toUpperCase().replace(/-/g, '');
 export const createDeviceSessionId = () => {
   return sessionId;
 };
+
+export type Labels = {
+  name: string;
+  number: string;
+  expiry: string;
+  cvc: string;
+};
+
+export type Placeholders = {
+  name: string;
+  number: string;
+  expiry: string;
+  cvc: string;
+};
+
 export type OpenpayState = {
   form: any;
   sessionId: any;
@@ -32,6 +46,8 @@ export type OpenpayProps = {
   publicKey: string;
   isProductionMode: boolean;
   buttonText?: string;
+  labels?: Labels;
+  placeholders?: Placeholders;
 };
 export default class Openpay extends Component<OpenpayProps, OpenpayState> {
   API_URL_SANDBOX: string;
@@ -58,8 +74,13 @@ export default class Openpay extends Component<OpenpayProps, OpenpayState> {
     this.createDeviceSessionId();
   }
 
-  componentWillReceiveProps(nextProps: OpenpayProps) {
-    this.setState(() => ({ loading: nextProps.loading }));
+  static getDerivedStateFromProps(
+    nextProps: OpenpayProps,
+    prevState: OpenpayProps
+  ) {
+    if (nextProps.loading !== prevState.loading) {
+      return { loading: nextProps.loading };
+    } else return null;
   }
 
   validateProps = (props: any) => {
@@ -165,15 +186,7 @@ export default class Openpay extends Component<OpenpayProps, OpenpayState> {
   identifierForVendor = () => {
     let deviceSerial: any = '';
     try {
-      if (Constants.appOwnership === 'expo') {
-        console.log('Running in expo');
-        deviceSerial =
-          typeof Constants.installationId !== 'undefined'
-            ? Constants.installationId
-            : Constants.deviceId;
-      } else {
-        deviceSerial = DeviceInfo.getUniqueId();
-      }
+      deviceSerial = DeviceInfo.getUniqueId();
     } catch (e) {
       console.log('error reading device ID', e);
     }
@@ -215,14 +228,14 @@ export default class Openpay extends Component<OpenpayProps, OpenpayState> {
   };
 
   render() {
-    const labels = {
+    const labels = this.props.labels ?? {
       name: 'Full Name',
       number: 'Number',
       expiry: 'Expiration Date',
       cvc: 'Security Code',
     };
 
-    const placeholders = {
+    const placeholders = this.props.placeholders ?? {
       name: "Holder's Name",
       number: '**** **** **** ****',
       expiry: 'MM/YY',

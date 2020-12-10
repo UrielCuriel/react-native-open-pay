@@ -1,6 +1,6 @@
 {
   "name": "rn-openpay",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "description": "module for using openpay api in react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -144,9 +144,8 @@
   "dependencies": {
     "@types/react-native-base64": "^0.1.0",
     "@types/sprintf-js": "^1.1.2",
-    "expo-constants": "^9.3.4",
     "react-native-base64": "^0.1.0",
-    "react-native-credit-card-input-fullpage": "^0.2.0",
+    "react-native-credit-card-fullpage-form": "^1.0.0",
     "react-native-device-info": "^7.3.0",
     "react-native-elements": "^3.0.0-alpha.1",
     "react-native-unimodules": "^0.12.0",
