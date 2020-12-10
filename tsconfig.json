@@ -4,6 +4,7 @@
     "paths": {
       "react-native-open-pay": ["./src/index"]
     },
+    "typeRoots": ["./node_modules/@types", "./types"],
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,

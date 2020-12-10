@@ -1,25 +1,48 @@
 import * as React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
-import OpenPay from 'react-native-open-pay';
 
-export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+import Openpay, { createDeviceSessionId } from 'react-native-open-pay';
+import { Component } from 'react';
 
-  React.useEffect(() => {
-    OpenPay.multiply(3, 7).then(setResult);
-  }, []);
+export default class App extends Component {
+  state = {
+    loading: false,
+  };
 
-  return (
-    <View style={styles.container}>
-      <Text>Result: {result}</Text>
-    </View>
-  );
+  successToken = (response: { id: any }) => {
+    const deviceSessionId = createDeviceSessionId();
+    const token = response.id;
+    this.setState(() => ({ loading: false }));
+    console.log(deviceSessionId);
+    console.log(token);
+
+    // Make the call to your server with your charge request
+  };
+
+  failToken = (response: any) => {
+    console.log('failToken', response);
+  };
+
+  render() {
+    const address = {
+      city: 'Querétaro',
+      country_code: 'MX',
+      postal_code: '76900',
+      line1: 'Av 5 de Febrero',
+      line2: 'Roble 207',
+      line3: 'Col Carrillo',
+      state: 'Queretaro',
+    };
+
+    return (
+      <Openpay
+        isProductionMode={false}
+        merchantId="m53wxf73sonprp7fptgf"
+        publicKey="pk_bed8e880b6374d718c6a037329d2ab68"
+        address={address}
+        successToken={this.successToken}
+        failToken={this.failToken}
+        loading={this.state.loading}
+      />
+    );
+  }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
