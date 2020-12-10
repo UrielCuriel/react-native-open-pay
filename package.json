@@ -1,7 +1,7 @@
 {
-  "name": "react-native-open-pay",
+  "name": "rn-openpay",
   "version": "0.1.0",
-  "description": "mudule for using openpay api in react native",
+  "description": "module for using openpay api in react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/src/index.d.ts",
@@ -40,6 +40,7 @@
   "bugs": {
     "url": "https://github.com/UrielCuriel/react-native-open-pay/issues"
   },
+  "private": false,
   "homepage": "https://github.com/UrielCuriel/react-native-open-pay#readme",
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -141,12 +142,9 @@
     ]
   },
   "dependencies": {
-    "@expo/vector-icons": "Kaushald4/vector-icons#master",
     "@types/react-native-base64": "^0.1.0",
     "@types/sprintf-js": "^1.1.2",
-    "@unimodules/core": "^6.0.0",
     "expo-constants": "^9.3.4",
-    "expo-font": "^8.4.0",
     "react-native-base64": "^0.1.0",
     "react-native-credit-card-input-fullpage": "^0.2.0",
     "react-native-device-info": "^7.3.0",
